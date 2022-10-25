@@ -1,0 +1,11 @@
+bilibili、b站Up主专栏图片批量获取
+前置：Chrome浏览器（https://www.google.cn/chrome/）
+          ChromeDriver（https://chromedriver.chromium.org/downloads）
+          配置方法（https://blog.csdn.net/zhoukeguai/article/details/113247342）
+          Python（当然！）
+运行前的准备：
+       转到Up主的主页，在"TA的专栏"右边选择更多。
+       在这个页面下您可以利用搜索、排序来筛选您想要专栏中的图片，然后复制当前的网页链接。
+       安装requirement.txt所需库，随后运行，向程序传入刚刚复制的网页的链接。
+       然后就会开始抓取和下载刚刚页面下所有专栏内的图片（会自动翻页到最后一页）。
+       在下载完成前请不要关闭程序弹出的网页和中断程序。图片将保存在程序同一个文件夹中的PicSave文件夹。
