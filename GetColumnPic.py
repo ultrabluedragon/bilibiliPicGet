@@ -16,8 +16,8 @@ if not os.path.exists(path_save):
     os.makedirs(path_save)
 
 headers = {
-    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36',
-    'cookie': '''buvid3=27004B18-7172-495A-AFBE-E6C92713AE6952850infoc; nostalgia_conf=-1; i-wanna-go-back=-1; _uuid=DB9B2EDE-281E-5F47-84FA-AFB71E44B27A98989infoc; buvid4=CE565E95-91C0-17C5-223E-5684966AEA6B05490-022073009-DsswV1JjVn6NEkwBvys0Ww%3D%3D; CURRENT_BLACKGAP=0; theme_style=light; blackside_state=0; rpdid=|(u|JkYJk|ml0J'uYlmuRJmkk; LIVE_BUVID=AUTO9716591487303688; is-2022-channel=1; buvid_fp_plain=undefined; DedeUserID=487364686; DedeUserID__ckMd5=3f86b8024e83e23c; b_ut=5; hit-dyn-v2=1; b_timer=%7B%22ffp%22%3A%7B%22333.1007.fp.risk_27004B18%22%3A%22182AB31FDCF%22%2C%22333.337.fp.risk_27004B18%22%3A%22182AB32280F%22%2C%22333.788.fp.risk_27004B18%22%3A%22182CD73A2CD%22%2C%22333.976.fp.risk_27004B18%22%3A%22182D2AE857E%22%2C%22333.42.fp.risk_27004B18%22%3A%2218270F0BD3D%22%2C%22333.999.fp.risk_27004B18%22%3A%2218294D38D2A%22%2C%22333.1193.fp.risk_27004B18%22%3A%22182D2AE8CF6%22%2C%22444.42.fp.risk_27004B18%22%3A%2218294D4644C%22%2C%22888.55048.fp.risk_27004B18%22%3A%22182A4840091%22%7D%7D; b_nut=100; SL_GWPT_Show_Hide_tmp=1; SL_wptGlobTipTmp=1; fingerprint=859da9024250f5f73dec44b9076074b6; buvid_fp=ffe9a05b87c220ddc3806b90f86bfdd4; bp_video_offset_487364686=713351977374842900; SL_G_WPT_TO=zh-CN; CURRENT_QUALITY=0; CURRENT_FNVAL=4048; bsource=search_baidu; SESSDATA=55d52f14%2C1681812546%2Cdcc4d%2Aa2; bili_jct=88f34688793f8fdb70fdb3ec168337b0; sid=g68z1wcy; b_lsid=5F918A6A_183F984B4E7; PVID=2; innersign=0''',
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11',
+    # 'cookie': '',  # 根据需要自己填写
     #  临时的cookie
     'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
     'accept-encoding': 'gzip, deflate, br',
@@ -29,8 +29,8 @@ requests.packages.urllib3.disable_warnings()  # 忽视警告
 urlUp = input('输入专栏url')
 
 chrome_options = Options()
-argument = '--user-data-dir=C:\\Users\\45007\\AppData\\Local\\Google\\Chrome\\User Data'
-chrome_options.add_argument(argument)
+# argument = '--user-data-dir=（这里要填写自己的路径）\\Google\\Chrome\\User Data'  # 调用本机浏览器设定
+# chrome_options.add_argument(argument)  # 可以参考https://www.jianshu.com/p/32ed00caf22b
 driver_chrome = webdriver.Chrome(chrome_options=chrome_options)
 driver_chrome.get(urlUp)
 
@@ -60,7 +60,7 @@ driver_chrome.close()
 picList = []
 for Column in tqdm(linkList):  # 爬取所有专栏中图片的Url并且保存在picList中
     # headers = {
-    #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
+    #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11'
     # }
     if 'http' not in Column:
         response = requests.get('https://' + Column, headers=headers)
@@ -87,7 +87,7 @@ for Column in tqdm(linkList):  # 爬取所有专栏中图片的Url并且保存�
 @multitasking.task
 def download(url: str, file_name: str) -> None:  # 定义多线程下载器
     # headers = {
-    #     'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36'
+    #     'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11'
     # }
 
     Pic = requests.get(url, headers=headers, stream=True)
